@@ -3,120 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Kanban Board</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f5f7;
-    }
 
-    h1 {
-      text-align: center;
-      padding: 20px;
-    }
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="style.css">
 
-    .board {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-    }
-
-    .column {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      width: 30%;
-      min-height: 400px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .column h2 {
-      text-align: center;
-    }
-
-    .task {
-      background: #e0e0e0;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: grab;
-    }
-
-    .add-task {
-      display: flex;
-      margin-top: 10px;
-    }
-
-    .add-task input {
-      flex: 1;
-      padding: 8px;
-    }
-
-    .add-task button {
-      padding: 8px;
-    }
-  </style>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<h1>Kanban Board</h1>
+<h1>🚀 My Kanban Board</h1>
 
 <div class="board">
 
-  <div class="column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
-    <h2>To Do</h2>
+  <div class="column" id="todo">
+    <h2>📝 To Do</h2>
     <div class="add-task">
-      <input type="text" id="taskInput" placeholder="Add task">
-      <button onclick="addTask()">Add</button>
+      <input type="text" id="taskInput" placeholder="Add a task...">
+      <button onclick="addTask()">+</button>
     </div>
   </div>
 
-  <div class="column" id="inprogress" ondrop="drop(event)" ondragover="allowDrop(event)">
-    <h2>In Progress</h2>
+  <div class="column" id="inprogress">
+    <h2>⚡ In Progress</h2>
   </div>
 
-  <div class="column" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
-    <h2>Done</h2>
+  <div class="column" id="done">
+    <h2>✅ Done</h2>
   </div>
 
 </div>
 
-<script>
-  let taskId = 0;
-
-  function addTask() {
-    const input = document.getElementById('taskInput');
-    const value = input.value.trim();
-
-    if (value === '') return;
-
-    const task = document.createElement('div');
-    task.className = 'task';
-    task.draggable = true;
-    task.id = 'task-' + taskId++;
-    task.innerText = value;
-
-    task.ondragstart = drag;
-
-    document.getElementById('todo').appendChild(task);
-    input.value = '';
-  }
-
-  function allowDrop(ev) {
-    ev.preventDefault();
-  }
-
-  function drag(ev) {
-    ev.dataTransfer.setData('text', ev.target.id);
-  }
-
-  function drop(ev) {
-    ev.preventDefault();
-    const data = ev.dataTransfer.getData('text');
-    const task = document.getElementById(data);
-    ev.target.closest('.column').appendChild(task);
-  }
-</script>
+<!-- JS Link -->
+<script src="script.js"></script>
 
 </body>
 </html>
